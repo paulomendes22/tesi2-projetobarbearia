@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar servico</title>
+</head>
+<body>
+    <h2>Agendar servico</h2>
+    <form action="{% url 'agendar_servico' cliente.id %}" method="POST">
+        {% csrf_token %}
+        <label>Serviço</label>
+        <select name="servico">
+            {% for servico in servicos %}
+                <option value="{{ servico.id }}">{{servico.nome}} - {{servico.barbeiro.barbearia.nome}} - {{servico.barbeiro.nome}} - {{servico.preco}}</option>
+            {% endfor %}
+        </select>
+        <label>Data e hora:</label>
+        <input type="datetime-local" name="data">
+        <input type="submit" value="Registrar">
+    </form>
+</body>
+</html>
